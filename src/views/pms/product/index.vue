@@ -277,7 +277,8 @@
     updateDeleteStatus,
     updateNewStatus,
     updateRecommendStatus,
-    updatePublishStatus
+    updatePublishStatus,
+    updateVerifyStatus
   } from '@/api/product'
   import {fetchList as fetchSkuStockList,update as updateSkuStockList} from '@/api/skuStock'
   import {fetchList as fetchProductAttrList} from '@/api/productAttr'
@@ -339,7 +340,15 @@
           {
             label: "移入回收站",
             value: "recycle"
-          }
+          },
+          {
+            label: "审核通过",
+            value: "verifyOn"
+          },
+          {
+            label: "审核不通过",
+            value: "verifyOff"
+          },
         ],
         operateType: null,
         listQuery: Object.assign({}, defaultListQuery),
@@ -533,6 +542,12 @@
             case this.operates[7].value:
               this.updateDeleteStatus(1,ids);
               break;
+            case this.operates[8].value:
+             this.updateVerifyStatus(1,ids);
+              break;
+            case this.operates[9].value:
+              this.updateVerifyStatus(0,ids);
+              break;
             default:
               break;
           }
@@ -629,6 +644,20 @@
           });
         });
       },
+      updateVerifyStatus(verifyStatus, ids) {
+        let params = new URLSearchParams();
+        params.append('ids', ids);
+        params.append('verifyStatus', verifyStatus);
+        params.append('detail', "验证");
+        updateVerifyStatus(params).then(response => {
+          this.$message({
+            message: '修改成功',
+            type: 'success',
+            duration: 1000
+          });
+        });
+      },
+      
       updateDeleteStatus(deleteStatus, ids) {
         let params = new URLSearchParams();
         params.append('ids', ids);

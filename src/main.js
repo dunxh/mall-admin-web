@@ -15,6 +15,7 @@ import store from './store'
 
 import '@/icons' // icon
 import '@/permission' // permission control
+import 'url-search-params-polyfill';
 
 Vue.use(ElementUI, { locale })
 Vue.use(VCharts)

@@ -47,6 +47,14 @@ export function updatePublishStatus(params) {
   })
 }
 
+export function updateVerifyStatus(params) {
+	  return request({
+	    url:'/product/update/verifyStatus',
+	    method:'post',
+	    params:params
+	  })
+	}
+
 export function createProduct(data) {
   return request({
     url:'/product/create',
